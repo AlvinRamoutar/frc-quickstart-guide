@@ -36,6 +36,7 @@
   ],
   "pdp": [
     {
+      "category": "pdp",
       "type": "mc",
       "question": "The PDP requires fuses for what channels?",
       "choices": [
@@ -48,6 +49,7 @@
       "explanation": "The PDP is also a circuit breaker, and its job as a circuit breaker is to protect your components. To ensure its job is done, and that your robot is safe, NO connected components will function without a fuse of the appropriate amperage placed in the respected spot. Do note for the vBat output channels, it is only necessary to place a fuse on the channel where you are drawing power from."
     },
     {
+      "category": "pdp",
       "type": "fillin",
       "question": "The PDP has a total of ___ output pairs rated at 40A.",
       "choices": {},
@@ -55,6 +57,7 @@
       "explanation": "The PDP has a total of 16 vBat output pairs, 8 of which are rated for 40A, the other 8 for 30A."
     },
     {
+      "category": "pdp",
       "type": "diagram",
       "question": "Match each feature of the PDP with the diagram. In the box beside each feature name, place the letter corresponding to its position on the diagram.",
       "image" : "images/PDP_diagram.jpg",
@@ -70,6 +73,7 @@
   ],
   "pcm": [
     {
+      "category": "pcm",
       "type": "mc",
       "question": "The PCM is the control module for hydraulic and pneumatic systems on your FRC robot.",
       "choices": [
@@ -80,6 +84,7 @@
       "explanation": "The 'P' in PCM stands for pneumatic. The difference between pneumatic and hydraulics is that the former deals with compressed gas, while the latter deals with compressed liquid/oil. They are NOT interchangeable."
     },
     {
+      "category": "pcm",
       "type": "fillin",
       "question": "When the solenoid voltage jumper is disabled (floating), the solenoid output channels will have a voltage of ___.",
       "choices": {},
@@ -87,6 +92,7 @@
       "explanation": "When in the leftmost position, solenoid channels will be operating at 12V. Else, 24V as stated in documentation."
     },
     {
+      "category": "pcm",
       "type": "diagram",
       "question": "Match each feature of the PCM with the diagram. In the box beside each feature name, place the letter corresponding to its position on the diagram.",
       "image" : "images/PCM_diagram.jpg",
@@ -102,6 +108,7 @@
   ],
   "vrm": [
     {
+      "category": "vrm",
       "type": "mc",
       "question": "When in operation, either the 5V OR 12V channels can be run at one time; not both.",
       "choices": [
@@ -112,6 +119,7 @@
       "explanation": "The 5V and 12V channels are each ran by their own independent SEPIC (single ended primary inductor converter)."
     },
     {
+      "category": "vrm",
       "type": "fillin",
       "question": "What is the continuous current draw limit for a 2A channel?",
       "choices": {},
@@ -119,6 +127,7 @@
       "explanation": "The 2A rating is a PEAK current. In reality, continuous draw should not exceed 1.5A."
     },
     {
+      "category": "vrm",
       "type": "diagram",
       "question": "Match each feature of the VRM with the diagram. In the box beside each feature name, place the letter corresponding to its position on the diagram.",
       "image" : "images/VRM_diagram.jpg",
@@ -134,6 +143,7 @@
   ],
   "motorControllers": [
     {
+      "category": "motorControllers",
       "type": "mc",
       "question": "You can build a speed controller with relays.",
       "choices": [
@@ -144,6 +154,7 @@
       "explanation": "Although more difficult than using an h-bridge, it is indeed possible to build a speed controller with an array of relays."
     },
     {
+      "category": "motorControllers",
       "type": "fillin",
       "question": "Speed controllers, notably the ESC (electronic speed control) modules used in FRC are controlled with this 3-letter acronym signal.",
       "choices": {},
@@ -151,6 +162,7 @@
       "explanation": "PWM (Pulse Width Modulation) is a digital signal based on digital HIGH and LOW duty cycles, transmitted in pulses."
     },
     {
+      "category": "motorControllers",
       "type": "mc",
       "question": "Utilizes mechanical switching technology.",
       "choices": [
@@ -163,6 +175,7 @@
       "explanation": "ESC (electronic speed control) uses transistors for switching. Relays use a mechanical switch, often times consisting of an electromagnet."
     },
     {
+      "category": "motorControllers",
       "type": "mc",
       "question": "With regards to driving a motor with a speed controller via PWM, faster speed is expected from a longer duration of HIGH duty cycles.",
       "choices": [

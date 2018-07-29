@@ -23,7 +23,7 @@
     <fieldset data-role="controlgroup">
         <p>{{question}}</p>
         {{#each choices}}
-        <input type="radio" name="mc_{{../category}}" id="q{{@index}}_mc_{{../category}}" value="{{this}}">
+        <input type="radio" name="mc_{{../category}}" id="q{{@index}}_mc_{{../category}}">
         <label for="q{{@index}}_mc_{{../category}}">{{this}}</label>
         {{/each}}
     </fieldset>
@@ -206,7 +206,7 @@
             <h4>Features</h4>
             <p>
                 <img src="images/am-3000-2_diagram.jpg">
-            <ol>
+            <ol type="A">
                 <li><strong>Digital Input and Output (DIO) connectors</strong><br>
                     Handles digital input (HIGH or LOW signals). Used primary for interfacing sensors to your
                     robotic system, ideal for switches (e.g. Limit Switches).
@@ -226,7 +226,7 @@
                 <li>
                     <strong>CAN Port</strong><br>
                     Stands for Controller Area Network, allows for devices (often, microcontrollers) to communicate
-                    with each other without a host machine. This bus is used to connect your roboRIO to your PCM,
+                    with each other without a host machine. This bus is used to connect your roboRIO to your PCM,
                     and your PCM to your PDP, giving them the ability to communicate with each other.
                 </li>
                 <li>
@@ -273,7 +273,7 @@
                 </li>
                 <li>
                     <strong>User and Reset buttons</strong><br>
-                    RESET restarts the roboRIO processor and FPGA. Similar to the reset button on an Arduino.USER
+                    RESET restarts the roboRIO processor and FPGA. Similar to the reset button on an Arduino. USER
                     button produces a logical FALSE while pressed, and TRUE otherwise. Often used for debugging as a
                     manual, physical trigger.
                 </li>
@@ -373,7 +373,7 @@
         <h1>FRC Starter's Guide</h1>
     </header>
     <section role="main" class="ui-content">
-        <h2>NI RoboRIO</h2>
+        <h2>Power Distribution Panel (PDP)</h2>
         <img src="images/217-4244.jpg">
         <p class="wpilibSummary">
             The Power Distribution Panel (PDP) is designed to distribute power from a 12VDC battery to various robot
@@ -392,17 +392,17 @@
             <h4>Features</h4>
             <p>
                 <img src="images/PDP_diagram.jpg">
-            <ol>
-                <li><strong>Vbat Output Channels</strong><br>
-                    16 output channels (+/- pair) split 8/8, where channels 4-11 are rated for 30 amps, while channels
-                    0-3, 12-15 are rated for 40 amps.For an output channel to be usable, it must be first outfitted
-                    with a fuse of the appropriate amperage.
-                    WAGO connectors.
-                </li>
+            <ol type="A">
                 <li>
                     <strong>PCM, VRM, and roboRIO Channels</strong><br>
                     Channels rated for 20 Amps (PCM, VRM) and 10 Amps (roboRIO).
                     Weidmuller connectors.
+                </li>
+                <li><strong>Vbat Output Channels</strong><br>
+                    16 output channels (+/- pair) split 8/8, where channels 4-11 are rated for 30 amps, while channels
+                    0-3, 12-15 are rated for 40 amps. For an output channel to be usable, it must be first outfitted
+                    with a fuse of the appropriate amperage.
+                    WAGO connectors.
                 </li>
                 <li>
                     <strong>CAN</strong><br>
@@ -431,7 +431,7 @@
                 </li>
                 <li>
                     It is recommended that the PDP be the final node in your CAN chain, since it has a terminating
-                    resistor. As such, your wiring will be as follows:roboRIO > PCM > PDP
+                    resistor. As such, your wiring will be as follows: roboRIO > PCM > PDP
                 </li>
             </ul>
             </p>
@@ -475,6 +475,229 @@
     </footer>
 </div>
 
+
+<!--
+    PAGE 05
+    PCM
+-->
+<div data-role="page" id="pcm">
+    <header data-role="header">
+        <h1>FRC Starter's Guide</h1>
+    </header>
+    <section role="main" class="ui-content">
+        <h2>Pneumatics Control Module (PCM)</h2>
+        <img src="images/217-4243.jpg">
+        <p class="wpilibSummary">
+            The PCM is a device that contains all of the inputs and outputs required to operate 12V or 24V pneumatic
+            solenoids and the on board compressor. The PCM is enabled/disabled by the roboRIO over the CAN interface.
+            The PCM contains an input for the pressure sensor and will control the compressor automatically when the
+            robot is enabled and a solenoid has been created in the code. The device also collects diagnostic
+            information such as solenoid states, pressure switch state, and compressor state. The module includes
+            diagnostic LED’s for both CAN and the individual solenoid channels.
+        </p>
+        <p>
+            Depending on its use, the pneumatics system tends to be one of the most powerful, simple, and dangerous. On
+            the surface, there isn't much to it; compressed air is pumped into a piston, forcing its expansion. However,
+            unlike speed controllers which burn out in a stroke of heat and fit of smoke, invalid pneumatic systems
+            explode. In FRC, ample resources have been provided for setting up the pneumatics system, along with
+            regulatory equipment.
+            <br>
+            Unlike other modules in your robotic system, the PCM is optional, only needed if there is some form of
+            pneumatic system on board.
+        </p>
+        <br>
+        <div data-role="collapsible" data-theme="c" data-content-theme="b">
+            <h4>Features</h4>
+            <p>
+                <img src="images/PCM_diagram.jpg">
+            <ol type="A">
+                <li>
+                    <strong>CAN</strong><br>
+                    Connects the PCM to the roboRIO/PDP/PCM controller area network.
+                    Weidmuller connectors.
+                </li>
+                <li>
+                    8 Solenoid Channels rated for 12/24V (adjusted via jumper) at a current sum of 500mA. Used to power
+                    pneumatic solenoids.
+                </li>
+                <li>
+                    Pressure switch input.
+                    Gives the PCM insight into the air pressure contained within your pneumatics system.
+                </li>
+                <li>
+                    Compressor output power channel, regulated by PCM.
+                </li>
+            </ol>
+            All Connections are Weidmuller.
+            </p>
+        </div>
+        <div data-role="collapsible" data-theme="c" data-content-theme="b">
+            <h4>Tips</h4>
+            <p>
+            <ul>
+                <li>
+                    Changing the solenoid voltage jumper changes the voltage across ALL solenoid channels. If left
+                    floating (NO jumper), the voltage across solenoid channels will be 24V.
+                </li>
+                <li>
+                    When mounting, take advantage of the holes on either corner which are perfect for a classic bolt &
+                    nut.
+                </li>
+                <li>
+                    As an aside, the air compressor will most likely be the loudest component of your robotic system. It
+                    is recommended that the air compressor be mounted AWAY from your control system board, near the
+                    tanks, and done so securely. The vibrations can loosen a standard nut from a bolt, as such, systems
+                    mounted near the air compressor using a bolt & nut should utilize lock nuts and lock washers.
+                </li>
+            </ul>
+            </p>
+        </div>
+        <div data-role="collapsible" data-theme="c" data-content-theme="b">
+            <h4>Knowledge Quiz</h4>
+            <div id="pcm_questionBlock"></div>
+            <br>
+            <div data-role="navbar" data-iconpos="right">
+                <ul>
+                    <li><a href="#" data-icon="check" data-role="button">Check</a></li>
+                    <li><a href="#" data-icon="star" data-role="button">Save</a></li>
+                    <li><a href="#" data-icon="refresh" data-role="button">Clear</a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <footer data-role="footer">
+        <div data-role="navbar" data-iconpos="right">
+            <ul>
+                <li>
+                    <a class="footerBtn" href="#pdp" data-role="button"
+                       data-icon="arrow-l"
+                       data-transition="flip"
+                       data-direction="reverse">Back</a>
+                </li>
+                <li>
+                    <select class="footerBtn" style="margin: 0px;" data-role="button" name="select-page"
+                            data-mini="true">
+                        <option value="0">Home</option>
+                        <option value="1">About</option>
+                        <option value="2">The 3rd Option</option>
+                    </select>
+                </li>
+                <li>
+                    <a class="footerBtn" href="#vrm" data-role="button" data-icon="arrow-r" data-transition="flip"
+                       data-direction="forward">Next</a>
+                </li>
+            </ul>
+        </div>
+    </footer>
+</div>
+
+
+<!--
+    PAGE 06
+    VRM
+-->
+<div data-role="page" id="vrm">
+    <header data-role="header">
+        <h1>FRC Starter's Guide</h1>
+    </header>
+    <section role="main" class="ui-content">
+        <h2>Voltage Regulator Module (VRM)</h2>
+        <img src="images/am-2857-2.jpg">
+        <p class="wpilibSummary">
+            The VRM is an independent module that is powered by 12 volts. The device is wired to a dedicated connector
+            on the PDP. The module has multiple regulated 12V and 5V outputs. The purpose of the VRM is to provide
+            regulated power for the robot radio, custom circuits, and IP vision cameras.
+        </p>
+        <p>
+            A valuable component for powering low voltage device. True to its namesake, it drops the voltage across two
+            sets of rails featuring channels for 12V and 5V. This module is famous in FRC robotic systems for powering
+            the included OpenMesh radio, custom sensor circuits, an Arduino, and even LED lighting.
+        </p>
+        <br>
+        <div data-role="collapsible" data-theme="c" data-content-theme="b">
+            <h4>Features</h4>
+            <p>
+                <img src="images/VRM_diagram.jpg">
+            <ol type="A">
+                <li>
+                    <strong>CAN</strong><br>
+                    Connects the PCM to the roboRIO/PDP/PCM controller area network.
+                    Weidmuller connectors.
+                </li>
+                <li>
+                    8 Solenoid Channels rated for 12/24V (adjusted via jumper) at a current sum of 500mA. Used to power
+                    pneumatic solenoids.
+                </li>
+                <li>
+                    Pressure switch input.
+                    Gives the PCM insight into the air pressure contained within your pneumatics system.
+                </li>
+                <li>
+                    Compressor output power channel, regulated by PCM.
+                </li>
+            </ol>
+            All Connections are Weidmuller.
+            </p>
+        </div>
+        <div data-role="collapsible" data-theme="c" data-content-theme="b">
+            <h4>Tips</h4>
+            <p>
+            <ul>
+                <li>
+                    Changing the solenoid voltage jumper changes the voltage across ALL solenoid channels. If left
+                    floating (NO jumper), the voltage across solenoid channels will be 24V.
+                </li>
+                <li>
+                    When mounting, take advantage of the holes on either corner which are perfect for a classic bolt &
+                    nut.
+                </li>
+                <li>
+                    As an aside, the air compressor will most likely be the loudest component of your robotic system. It
+                    is recommended that the air compressor be mounted AWAY from your control system board, near the
+                    tanks, and done so securely. The vibrations can loosen a standard nut from a bolt, as such, systems
+                    mounted near the air compressor using a bolt & nut should utilize lock nuts and lock washers.
+                </li>
+            </ul>
+            </p>
+        </div>
+        <div data-role="collapsible" data-theme="c" data-content-theme="b">
+            <h4>Knowledge Quiz</h4>
+            <div id="pcm_questionBlock"></div>
+            <br>
+            <div data-role="navbar" data-iconpos="right">
+                <ul>
+                    <li><a href="#" data-icon="check" data-role="button">Check</a></li>
+                    <li><a href="#" data-icon="star" data-role="button">Save</a></li>
+                    <li><a href="#" data-icon="refresh" data-role="button">Clear</a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <footer data-role="footer">
+        <div data-role="navbar" data-iconpos="right">
+            <ul>
+                <li>
+                    <a class="footerBtn" href="#pdp" data-role="button"
+                       data-icon="arrow-l"
+                       data-transition="flip"
+                       data-direction="reverse">Back</a>
+                </li>
+                <li>
+                    <select class="footerBtn" style="margin: 0px;" data-role="button" name="select-page"
+                            data-mini="true">
+                        <option value="0">Home</option>
+                        <option value="1">About</option>
+                        <option value="2">The 3rd Option</option>
+                    </select>
+                </li>
+                <li>
+                    <a class="footerBtn" href="#vrm" data-role="button" data-icon="arrow-r" data-transition="flip"
+                       data-direction="forward">Next</a>
+                </li>
+            </ul>
+        </div>
+    </footer>
+</div>
 
 </body>
 </html>
