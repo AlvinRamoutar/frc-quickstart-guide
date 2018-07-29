@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="themes/frc.css"/>
+    <link rel="stylesheet" href="themes/jquery.mobile.icons.min.css"/>
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.min.css"/>
+    <link rel="stylesheet" href="css/main.css"/>
+
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.js"></script>
+    <script src="js/app.js"></script>
+    <title>Starter's Guide to FRC</title>
+</head>
+
+<body>
+
+<!-- MC Handlebar -->
+<script id="mc_q_template" type="text/x-handlebars-template">
+    <fieldset data-role="controlgroup">
+        <p>{{question}}</p>
+        {{#each choices}}
+        <input type="radio" name="mc_{{../category}}" id="q{{@index}}_mc_{{../category}}" value="{{this}}">
+        <label for="q{{@index}}_mc_{{../category}}">{{this}}</label>
+        {{/each}}
+    </fieldset>
+    <div data-role="collapsible" data-mini="true">
+        <h6>Explanation</h6>
+        <p>{{explanation}}</p>
+    </div>
+    <small id="a{{@index}}_mc_{{category}}" class="solution" hidden="true">Answer: {{solution}}</small>
+    <br>
+    <hr/>
+</script>
+
+<!-- Fill-in the blanks Handlebar -->
+<script id="fitb_q_template" type="text/x-handlebars-template">
+    <fieldset data-role="controlgroup">
+        <p>{{question}}</p>
+        <input type="text" name="fitb_{{category}}" id="q{{@index}}_fitb_{{category}}">
+    </fieldset>
+    <div data-role="collapsible" data-mini="true">
+        <h6>Explanation</h6>
+        <p>{{explanation}}</p>
+    </div>
+    <small id="a{{@index}}_fitb_{{category}}" class="solution" hidden="true">Answer: {{solution}}</small>
+    <br>
+    <hr/>
+</script>
+
+<!-- Diagram labelling Handlebar -->
+<script id="diag_q_template" type="text/x-handlebars-template">
+    <fieldset data-role="controlgroup">
+        <p>{{question}}</p>
+        <img src="{{image}}">
+        <table width="100%">
+            <tr>
+                <th width="88%">Feature</th>
+                <th width="12%">Letter</th>
+            </tr>
+            {{#each choices}}
+            <tr>
+                <td>{{this}}</td>
+                <td><input type="text" name="q{{@index}}_diag_{{../category}}"></td>
+            </tr>
+            {{/each}}
+        </table>
+    </fieldset>
+    <small id="a{{@index}}_diag_{{category}}" class="solution" hidden="true">Answer: {{solution}}</small>
+    <hr/>
+</script>
+
+<!--
+    PAGE 01 (HOME)
+    FIRST Robotics Competition
+-->
+<div data-role="page" id="firstRoboticsCompetition">
+    <header data-role="header">
+        <h1>FRC Starter's Guide</h1>
+    </header>
+    <section role="main" class="ui-content">
+        <h2>FIRST Robotics Competition</h2>
+        <img src="images/FIRSTRobotics_IconVert_RGB.jpg">
+
+        <p><strong><a href="https://www.firstinspires.org/robotics/frc">FIRST Robotics</a></strong> is at its core, a
+            program given birth to by the outstanding team at FIRST, whose mission
+            involves empowering youth <strong>For Inspiration and Recognition of Science and Technology.</strong> Today,
+            it has grown to
+            much more. FRC and other FIRST programs are shaping communities, putting technology into the hands of
+            unprivileged youth and challenging minds across the world to become more than just a 'user' of technology,
+            but rather an innovator.</p>
+
+        <p>True to its namesake, FIRST promotes these values through competitions, the FIRST Robotics Competition
+            (FRC). FRC is an event, a sport where robots are the players, working together with their alliance against
+            opponents to achieve specific objectives identified in the annual challenge.</p>
+
+        <p>Ironically, the challenge involves teams building Robots. Luckily, FIRST has prepared specialized kits
+            for teams which help accelerate their build process. Along this equipment is a
+            <a href="https://www.firstinspires.org/robotics/frc/kit-of-parts">lot of cool stuff</a>
+            provided on behalf of FIRST sponsors. A key set of this equipment provided would be the
+            <strong>FRC Control System Hardware</strong> - both expensive and daunting at first.</p>
+    </section>
+    <footer data-role="footer">
+        <div data-role="navbar" data-iconpos="right">
+            <ul>
+                <li>
+                    <a class="footerBtn" href="#" data-role="button" data-icon="arrow-l"
+                       data-transition="flip"
+                       data-direction="reverse">Back</a></li>
+                <li>
+                    <select class="footerBtn" style="margin: 0px;" data-role="button" name="select-page"
+                            data-mini="true">
+                        <option value="0">Home</option>
+                        <option value="1">About</option>
+                        <option value="2">The 3rd Option</option>
+                    </select>
+                </li>
+                <li>
+                    <a class="footerBtn" href="#purposeOfGuide" data-role="button" data-icon="arrow-r"
+                       data-transition="flip"
+                       data-direction="forward">Next</a>
+                </li>
+            </ul>
+        </div>
+    </footer>
+</div>
+
+<!--
+    PAGE 02
+    Purpose of this Guide
+-->
+<div data-role="page" id="purposeOfGuide">
+    <header data-role="header">
+        <h1>FRC Starter's Guide</h1>
+    </header>
+    <section role="main" class="ui-content">
+        <h2>Purpose of this Guide</h2>
+        <p>
+            This guide strives to give a brief overview of several main control system elements for the <strong>FRC 2018
+            control
+            system.</strong> Unlike documentation for these components, I will try to go into detail where each of these
+            components fit into the 'grand scheme' that is your robotic system. Hence, expect some practical tips around
+            the technicalities, electrical (wiring), and possibly code.
+
+            For more information, I recommend you check out <a href="https://wpilib.screenstepslive.com/">WPILib</a>
+            , as well as the ever-supportive community at <a href="https://www.chiefdelphi.com/forums/portal.php">ChiefDelphi</a>.
+        </p>
+    </section>
+    <footer data-role="footer">
+        <div data-role="navbar" data-iconpos="right">
+            <ul>
+                <li>
+                    <a class="footerBtn" href="#firstRoboticsCompetition" data-role="button"
+                       data-icon="arrow-l"
+                       data-transition="flip"
+                       data-direction="reverse">Back</a></li>
+                <li>
+                    <select class="footerBtn" style="margin: 0px;" data-role="button" name="select-page"
+                            data-mini="true">
+                        <option value="0">Home</option>
+                        <option value="1">About</option>
+                        <option value="2">The 3rd Option</option>
+                    </select>
+                </li>
+                <li>
+                    <a class="footerBtn" href="#roboRIO" data-role="button" data-icon="arrow-r" data-transition="flip"
+                       data-direction="forward">Next</a>
+                </li>
+            </ul>
+        </div>
+    </footer>
+</div>
+
+
+<!--
+    PAGE 03
+    NI RoboRIO
+-->
+<div data-role="page" id="roboRIO">
+    <header data-role="header">
+        <h1>FRC Starter's Guide</h1>
+    </header>
+    <section role="main" class="ui-content">
+        <h2>NI RoboRIO</h2>
+        <img src="images/am-3000-2.jpg">
+        <p class="wpilibSummary">
+            The NI-roboRIO is the main robot controller used for FRC. The roboRIO includes a dual-core ARM Cortex™-A9
+            processor and FPGA which runs both trusted elements for control and safety as well as team-generated code.
+            Integrated controller I/O includes a variety of communication protocols (Ethernet, USB, CAN, SPI, I2C, and
+            serial) as well as PWM, servo, digital I/O, and analog I/O channels used to connect to robot peripherals for
+            sensing and control. The roboRIO should connect to the dedicated 12V port on the Power Distribution Panel
+            for power. Wired communication is available via USB or Ethernet.
+        </p>
+        <p>
+            The grand, flat, and all-powerful brain of your robot; roboRIO. Meant to be the successor to the compact RIO
+            (cRIO), the roboRIO is even more compact at a form factor of around 15cm x 15cm x 3cm.
+            The best analogy for the roboRIO would be a tricked-out Arduino. Both are microcontroller units, with the
+            roboRIO supporting much more functionality, such as on-board Ethernet and some useful safety features (e.g.
+            Brownout behavior).
+        </p>
+        <br>
+        <div data-role="collapsible" data-theme="c" data-content-theme="b">
+            <h4>Features</h4>
+            <p>
+                <img src="images/am-3000-2_diagram.jpg">
+            <ol>
+                <li><strong>Digital Input and Output (DIO) connectors</strong><br>
+                    Handles digital input (HIGH or LOW signals). Used primary for interfacing sensors to your
+                    robotic system, ideal for switches (e.g. Limit Switches).
+                    Teams often make the mistake of using DIO to drive motors or other devices. This is NOT the
+                    intention of the DIO rail, and doing so WILL DAMAGE your roboRIO. DIO outputs a sinking/sourcing
+                    current of 4mA, meant solemnly for digital signals, and not for powering devices. If you need to
+                    power devices, either pull from the PDP, or the VRM.
+                </li>
+                <li>
+                    <strong>RS-232 Port</strong><br>
+                    Used for serial communication.
+                </li>
+                <li>
+                    <strong>I2C</strong><br>
+                    Used for serial communication. I've seen teams use this for Arduino/roboRIO interfacing.
+                </li>
+                <li>
+                    <strong>CAN Port</strong><br>
+                    Stands for Controller Area Network, allows for devices (often, microcontrollers) to communicate
+                    with each other without a host machine. This bus is used to connect your roboRIO to your PCM,
+                    and your PCM to your PDP, giving them the ability to communicate with each other.
+                </li>
+                <li>
+                    <strong>Power Connector</strong><br>
+                    Connects over to the PDP, VIN for the roboRIO. Rated at 7-16V at 45W max.
+                </li>
+                <li>
+                    <strong>USB Device Port</strong><br>
+                    Best way to upload code to and from your roboRIO.
+                </li>
+                <li>
+                    <strong>USB Host Retention Mounts</strong><br>
+                </li>
+                <li>
+                    <strong>USB host ports</strong><br>
+                </li>
+                <li>
+                    <strong>Ethernet Port</strong><br>
+                    Connects the roboRIO to a network. Assigned an address by your robot radio (router). If there was a
+                    problem doing so, the RIO will have an auto configured IP.
+                </li>
+                <li>
+                    <strong>Serial Peripheral Interface (SPI) Port</strong><br>
+                    Used for serial communication with peripherals, such as complex sensors (e.g. Gyro).
+                </li>
+                <li>
+                    <strong>Status LEDs</strong><br>
+                    Used for serial communication with peripherals, such as complex sensors (e.g. Gyro).
+                </li>
+                <li>
+                    <strong>Pulse Width Modulation (PWM) Connectors</strong><br>
+                    Used to communicate with speed controllers and other PWM driven systems.
+                </li>
+                <li>
+                    <strong>myRIO Expansion Port (MXP)</strong><br>
+                    Used to connect with breakout boards and custom circuits/systems. Essentially, if you want to create
+                    a custom 'attachment' or device that interfaces directly with the roboRIO.
+                    Teams often use this port for custom breadboard circuits, such as a custom LED light show.
+                    Be careful with how you use XMP; it is important that all systems are controlled BY the roboRIO at
+                    all times. Your XMP use will be inspected!
+                </li>
+                <li>
+                    <strong>XMP retention mount</strong><br>
+                </li>
+                <li>
+                    <strong>User and Reset buttons</strong><br>
+                    RESET restarts the roboRIO processor and FPGA. Similar to the reset button on an Arduino.USER
+                    button produces a logical FALSE while pressed, and TRUE otherwise. Often used for debugging as a
+                    manual, physical trigger.
+                </li>
+                <li>
+                    <strong>Analog Input</strong><br>
+                    Used for connecting devices that have an analog output, such as certain sensors (e.g. LDR).
+                </li>
+                <li>
+                    <strong>Relay Connectors</strong><br>
+                    Used for connecting relays. <a href="#motorControllers">What's the difference between relays and
+                    speed controllers?</a>
+                </li>
+                <li>
+                    <strong>Robot Signal Light (RSL) Port</strong><br>
+                    All FRC robots must come equipped with a provided standard LED lamp, mounted where easily visible.
+                    This light flashes depending on roboRIO status.
+                </li>
+            </ol>
+            </p>
+        </div>
+        <div data-role="collapsible" data-theme="c" data-content-theme="b">
+            <h4>Tips</h4>
+            <p>
+            <ul>
+                <li>
+                    The roboRIO will have a plethora of wires situated around it, since most components of your robotic
+                    system will in one way or another interface with it. For this reason, it is recommended that the
+                    roboRIO be the central component to your control system board with ample space between itself, and
+                    other components.
+                </li>
+                <li>
+                    The roboRIO module should be physically protected - unless if you want to dish out another $1000 for
+                    it.
+                </li>
+                <li>
+                    The roboRIO should be easily accessible; especially during the competition. Make the lives of those
+                    in your pit easier!
+                </li>
+                <li>
+                    The recommended mounting technique for the roboRIO is zip ties on the bottom, through the mounting
+                    spots on the roboRIO, and through your control system board.
+                </li>
+                <li>
+                    For optimal operation, use a fully charged battery (especially before a match!). A low battery is
+                    asking for brownout when you need your bot the most. I highly recommend you check out the 'Brownout
+                    Behavior' section of the roboRIO User Manual.
+                </li>
+            </ul>
+            </p>
+        </div>
+        <div data-role="collapsible" data-theme="c" data-content-theme="b">
+            <h4>Knowledge Quiz</h4>
+            <div id="roboRIO_questionBlock"></div>
+            <br>
+            <div data-role="navbar" data-iconpos="right">
+                <ul>
+                    <li><a href="#" data-icon="check" data-role="button">Check</a></li>
+                    <li><a href="#" data-icon="star" data-role="button">Save</a></li>
+                    <li><a href="#" data-icon="refresh" data-role="button">Clear</a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <footer data-role="footer">
+        <div data-role="navbar" data-iconpos="right">
+            <ul>
+                <li>
+                    <a class="footerBtn" href="#purposeOfGuide" data-role="button"
+                       data-icon="arrow-l"
+                       data-transition="flip"
+                       data-direction="reverse">Back</a>
+                </li>
+                <li>
+                    <select class="footerBtn" style="margin: 0px;" data-role="button" name="select-page"
+                            data-mini="true">
+                        <option value="0">Home</option>
+                        <option value="1">About</option>
+                        <option value="2">The 3rd Option</option>
+                    </select>
+                </li>
+                <li>
+                    <a class="footerBtn" href="#pdp" data-role="button" data-icon="arrow-r" data-transition="flip"
+                       data-direction="forward">Next</a>
+                </li>
+            </ul>
+        </div>
+    </footer>
+</div>
+
+
+<!--
+    PAGE 04
+    PDP
+-->
+<div data-role="page" id="pdp">
+    <header data-role="header">
+        <h1>FRC Starter's Guide</h1>
+    </header>
+    <section role="main" class="ui-content">
+        <h2>NI RoboRIO</h2>
+        <img src="images/217-4244.jpg">
+        <p class="wpilibSummary">
+            The Power Distribution Panel (PDP) is designed to distribute power from a 12VDC battery to various robot
+            components through auto-resetting circuit breakers and a small number of special function fused connections.
+            The PDP provides 8 output pairs rated for 40A continuous current and 8 pairs rated for 30A continuous
+            current. The PDP provides dedicated 12V connectors for the roboRIO, as well as connectors for the Voltage
+            Regulator Module and Pneumatics Control Module. It also includes a CAN interface for logging current,
+            temperature, and battery voltage.
+        </p>
+        <p>
+            Most systems requiring power are to be connected to the PDP. The PDP is more than just a power distributor;
+            it's also an intelligent circuit breaker.
+        </p>
+        <br>
+        <div data-role="collapsible" data-theme="c" data-content-theme="b">
+            <h4>Features</h4>
+            <p>
+                <img src="images/PDP_diagram.jpg">
+            <ol>
+                <li><strong>Vbat Output Channels</strong><br>
+                    16 output channels (+/- pair) split 8/8, where channels 4-11 are rated for 30 amps, while channels
+                    0-3, 12-15 are rated for 40 amps.For an output channel to be usable, it must be first outfitted
+                    with a fuse of the appropriate amperage.
+                    WAGO connectors.
+                </li>
+                <li>
+                    <strong>PCM, VRM, and roboRIO Channels</strong><br>
+                    Channels rated for 20 Amps (PCM, VRM) and 10 Amps (roboRIO).
+                    Weidmuller connectors.
+                </li>
+                <li>
+                    <strong>CAN</strong><br>
+                    Connects the PDP to the roboRIO/PDP/PCM controller area network.
+                    Weidmuller connectors.
+                </li>
+                <li>
+                    <strong>Input Power</strong><br>
+                    Connects to the 12V battery via battery connectors (Bushings Lugs).
+                </li>
+            </ol>
+            </p>
+        </div>
+        <div data-role="collapsible" data-theme="c" data-content-theme="b">
+            <h4>Tips</h4>
+            <p>
+            <ul>
+                <li>
+                    When mounting, I recommend leaving ample space for the power rails to accommodate for heavy gauge
+                    wiring, as well as have the battery terminal mount facing outwards from your main control (mounting)
+                    board. This will ensure the 6 AWG wire for the battery will interfere the least with other
+                    wiring/component placements.
+                </li>
+                <li>
+                    To fasten, the PDP has holes on each corner. A bolt and nut would suffice.
+                </li>
+                <li>
+                    It is recommended that the PDP be the final node in your CAN chain, since it has a terminating
+                    resistor. As such, your wiring will be as follows:roboRIO > PCM > PDP
+                </li>
+            </ul>
+            </p>
+        </div>
+        <div data-role="collapsible" data-theme="c" data-content-theme="b">
+            <h4>Knowledge Quiz</h4>
+            <div id="pdp_questionBlock"></div>
+            <br>
+            <div data-role="navbar" data-iconpos="right">
+                <ul>
+                    <li><a href="#" data-icon="check" data-role="button">Check</a></li>
+                    <li><a href="#" data-icon="star" data-role="button">Save</a></li>
+                    <li><a href="#" data-icon="refresh" data-role="button">Clear</a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <footer data-role="footer">
+        <div data-role="navbar" data-iconpos="right">
+            <ul>
+                <li>
+                    <a class="footerBtn" href="#roboRIO" data-role="button"
+                       data-icon="arrow-l"
+                       data-transition="flip"
+                       data-direction="reverse">Back</a>
+                </li>
+                <li>
+                    <select class="footerBtn" style="margin: 0px;" data-role="button" name="select-page"
+                            data-mini="true">
+                        <option value="0">Home</option>
+                        <option value="1">About</option>
+                        <option value="2">The 3rd Option</option>
+                    </select>
+                </li>
+                <li>
+                    <a class="footerBtn" href="#pcm" data-role="button" data-icon="arrow-r" data-transition="flip"
+                       data-direction="forward">Next</a>
+                </li>
+            </ul>
+        </div>
+    </footer>
+</div>
+
+
+</body>
+</html>
