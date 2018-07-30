@@ -84,6 +84,33 @@
     </div>
 </script>
 
+<!-- Footer Handlebar -->
+<script id="footer_template" type="text/x-handlebars-template">
+    <div data-role="navbar" data-iconpos="right">
+        <ul>
+            <li>
+                <a class="footerBtn" href="#{{prevID}}" data-role="button"
+                   data-icon="arrow-l"
+                   data-transition="flip"
+                   data-direction="reverse">{{prevTitle}}</a>
+            </li>
+            <li>
+                <select class="footerBtn {{currentID}}_pageSelector" style="margin: 0px;" data-role="button" name="select-page"
+                        data-mini="true" data-native-menu="false">
+                    {{#each pageTitles}}
+                        <option value="{{../pageIDs.[@index]}}">{{this}}</option>
+                    {{/each}}
+                </select>
+            </li>
+            <li>
+                <a class="footerBtn" href="#{{nextID}}" data-role="button" data-icon="arrow-r"
+                   data-transition="flip"
+                   data-direction="forward">{{nextTitle}}</a>
+            </li>
+        </ul>
+    </div>
+</script>
+
 <!--
     PAGE 01 (HOME)
     FIRST Robotics Competition
@@ -114,29 +141,7 @@
             provided on behalf of FIRST sponsors. A key set of this equipment provided would be the
             <strong>FRC Control System Hardware</strong> - both expensive and daunting at first.</p>
     </section>
-    <footer data-role="footer">
-        <div data-role="navbar" data-iconpos="right">
-            <ul>
-                <li>
-                    <a class="footerBtn" href="#" data-role="button" data-icon="arrow-l"
-                       data-transition="flip"
-                       data-direction="reverse">Back</a></li>
-                <li>
-                    <select class="footerBtn" style="margin: 0px;" data-role="button" name="select-page"
-                            data-mini="true">
-                        <option value="0">Home</option>
-                        <option value="1">About</option>
-                        <option value="2">The 3rd Option</option>
-                    </select>
-                </li>
-                <li>
-                    <a class="footerBtn" href="#purposeOfGuide" data-role="button" data-icon="arrow-r"
-                       data-transition="flip"
-                       data-direction="forward">Next</a>
-                </li>
-            </ul>
-        </div>
-    </footer>
+    <footer name="firstRoboticsCompetition" data-role="footer"></footer>
 </div>
 
 <!--
@@ -160,29 +165,7 @@
             , as well as the ever-supportive community at <a href="https://www.chiefdelphi.com/forums/portal.php">ChiefDelphi</a>.
         </p>
     </section>
-    <footer data-role="footer">
-        <div data-role="navbar" data-iconpos="right">
-            <ul>
-                <li>
-                    <a class="footerBtn" href="#firstRoboticsCompetition" data-role="button"
-                       data-icon="arrow-l"
-                       data-transition="flip"
-                       data-direction="reverse">Back</a></li>
-                <li>
-                    <select class="footerBtn" style="margin: 0px;" data-role="button" name="select-page"
-                            data-mini="true">
-                        <option value="0">Home</option>
-                        <option value="1">About</option>
-                        <option value="2">The 3rd Option</option>
-                    </select>
-                </li>
-                <li>
-                    <a class="footerBtn" href="#roboRIO" data-role="button" data-icon="arrow-r" data-transition="flip"
-                       data-direction="forward">Next</a>
-                </li>
-            </ul>
-        </div>
-    </footer>
+    <footer name="purposeOfGuide" data-role="footer"></footer>
 </div>
 
 
@@ -341,30 +324,7 @@
             <div id="roboRIO_quizOptionsBar"></div>
         </div>
     </section>
-    <footer data-role="footer">
-        <div data-role="navbar" data-iconpos="right">
-            <ul>
-                <li>
-                    <a class="footerBtn" href="#purposeOfGuide" data-role="button"
-                       data-icon="arrow-l"
-                       data-transition="flip"
-                       data-direction="reverse">Back</a>
-                </li>
-                <li>
-                    <select class="footerBtn" style="margin: 0px;" data-role="button" name="select-page"
-                            data-mini="true">
-                        <option value="0">Home</option>
-                        <option value="1">About</option>
-                        <option value="2">The 3rd Option</option>
-                    </select>
-                </li>
-                <li>
-                    <a class="footerBtn" href="#pdp" data-role="button" data-icon="arrow-r" data-transition="flip"
-                       data-direction="forward">Next</a>
-                </li>
-            </ul>
-        </div>
-    </footer>
+    <footer name="roboRIO" data-role="footer"></footer>
 </div>
 
 
@@ -446,30 +406,7 @@
             <div id="pdp_quizOptionsBar"></div>
         </div>
     </section>
-    <footer data-role="footer">
-        <div data-role="navbar" data-iconpos="right">
-            <ul>
-                <li>
-                    <a class="footerBtn" href="#roboRIO" data-role="button"
-                       data-icon="arrow-l"
-                       data-transition="flip"
-                       data-direction="reverse">Back</a>
-                </li>
-                <li>
-                    <select class="footerBtn" style="margin: 0px;" data-role="button" name="select-page"
-                            data-mini="true">
-                        <option value="0">Home</option>
-                        <option value="1">About</option>
-                        <option value="2">The 3rd Option</option>
-                    </select>
-                </li>
-                <li>
-                    <a class="footerBtn" href="#pcm" data-role="button" data-icon="arrow-r" data-transition="flip"
-                       data-direction="forward">Next</a>
-                </li>
-            </ul>
-        </div>
-    </footer>
+    <footer name="pdp" data-role="footer"></footer>
 </div>
 
 
@@ -555,30 +492,7 @@
             <div id="pcm_quizOptionsBar"></div>
         </div>
     </section>
-    <footer data-role="footer">
-        <div data-role="navbar" data-iconpos="right">
-            <ul>
-                <li>
-                    <a class="footerBtn" href="#pdp" data-role="button"
-                       data-icon="arrow-l"
-                       data-transition="flip"
-                       data-direction="reverse">Back</a>
-                </li>
-                <li>
-                    <select class="footerBtn" style="margin: 0px;" data-role="button" name="select-page"
-                            data-mini="true">
-                        <option value="0">Home</option>
-                        <option value="1">About</option>
-                        <option value="2">The 3rd Option</option>
-                    </select>
-                </li>
-                <li>
-                    <a class="footerBtn" href="#vrm" data-role="button" data-icon="arrow-r" data-transition="flip"
-                       data-direction="forward">Next</a>
-                </li>
-            </ul>
-        </div>
-    </footer>
+    <footer name="pcm" data-role="footer"></footer>
 </div>
 
 
@@ -650,31 +564,7 @@
             <div id="vrm_quizOptionsBar"></div>
         </div>
     </section>
-    <footer data-role="footer">
-        <div data-role="navbar" data-iconpos="right">
-            <ul>
-                <li>
-                    <a class="footerBtn" href="#pcm" data-role="button"
-                       data-icon="arrow-l"
-                       data-transition="flip"
-                       data-direction="reverse">Back</a>
-                </li>
-                <li>
-                    <select class="footerBtn" style="margin: 0px;" data-role="button" name="select-page"
-                            data-mini="true">
-                        <option value="0">Home</option>
-                        <option value="1">About</option>
-                        <option value="2">The 3rd Option</option>
-                    </select>
-                </li>
-                <li>
-                    <a class="footerBtn" href="#motorControllers" data-role="button" data-icon="arrow-r"
-                       data-transition="flip"
-                       data-direction="forward">Next</a>
-                </li>
-            </ul>
-        </div>
-    </footer>
+    <footer name="vrm" data-role="footer"></footer>
 </div>
 
 
@@ -785,31 +675,7 @@
             <div id="motorControllers_quizOptionsBar"></div>
         </div>
     </section>
-    <footer data-role="footer">
-        <div data-role="navbar" data-iconpos="right">
-            <ul>
-                <li>
-                    <a class="footerBtn" href="#vrm" data-role="button"
-                       data-icon="arrow-l"
-                       data-transition="flip"
-                       data-direction="reverse">Back</a>
-                </li>
-                <li>
-                    <select class="footerBtn" style="margin: 0px;" data-role="button" name="select-page"
-                            data-mini="true">
-                        <option value="0">Home</option>
-                        <option value="1">About</option>
-                        <option value="2">The 3rd Option</option>
-                    </select>
-                </li>
-                <li>
-                    <a class="footerBtn" href="#otherNotables" data-role="button" data-icon="arrow-r"
-                       data-transition="flip"
-                       data-direction="forward">Next</a>
-                </li>
-            </ul>
-        </div>
-    </footer>
+    <footer name="motorControllers" data-role="footer"></footer>
 </div>
 
 
@@ -840,31 +706,7 @@
         </p>
         <br>
     </section>
-    <footer data-role="footer">
-        <div data-role="navbar" data-iconpos="right">
-            <ul>
-                <li>
-                    <a class="footerBtn" href="#motorControllers" data-role="button"
-                       data-icon="arrow-l"
-                       data-transition="flip"
-                       data-direction="reverse">Back</a>
-                </li>
-                <li>
-                    <select class="footerBtn" style="margin: 0px;" data-role="button" name="select-page"
-                            data-mini="true">
-                        <option value="0">Home</option>
-                        <option value="1">About</option>
-                        <option value="2">The 3rd Option</option>
-                    </select>
-                </li>
-                <li>
-                    <a class="footerBtn" href="#conclusion" data-role="button" data-icon="arrow-r"
-                       data-transition="flip"
-                       data-direction="forward">Next</a>
-                </li>
-            </ul>
-        </div>
-    </footer>
+    <footer name="otherNotables" data-role="footer"></footer>
 </div>
 
 
@@ -887,31 +729,7 @@
             <small>~ Alvin [Team 3705 (Arrowbots) Veteran]</small>
         <br>
     </section>
-    <footer data-role="footer">
-        <div data-role="navbar" data-iconpos="right">
-            <ul>
-                <li>
-                    <a class="footerBtn" href="#otherNotables" data-role="button"
-                       data-icon="arrow-l"
-                       data-transition="flip"
-                       data-direction="reverse">Back</a>
-                </li>
-                <li>
-                    <select class="footerBtn" style="margin: 0px;" data-role="button" name="select-page"
-                            data-mini="true">
-                        <option value="0">Home</option>
-                        <option value="1">About</option>
-                        <option value="2">The 3rd Option</option>
-                    </select>
-                </li>
-                <li>
-                    <a class="footerBtn" href="#conclusion" data-role="button" data-icon="arrow-r"
-                       data-transition="flip"
-                       data-direction="forward">Next</a>
-                </li>
-            </ul>
-        </div>
-    </footer>
+    <footer name="conclusion" data-role="footer"></footer>
 </div>
 
 </body>
