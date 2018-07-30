@@ -1,6 +1,19 @@
+/**
+ * Author:      Alvin Ramoutar
+ * Date:        2018/08/03
+ * Description: A simple jQuery Mobile site for info on FRC's Control System Hardware, 2018.
+ *              Developed for Sheridan College, 2018.
+ * File:        js/app.js
+ *              Code-behind for site interactivity, mainly knowledge quiz.
+ */
+
 var donePageInit = false;
 var jsonData = null;
 
+/*
+Storing page IDs and titles into arrays for use in navigation elements,
+ notably the footer.
+ */
 var pageIDs = ["firstRoboticsCompetition",
     "purposeOfGuide",
     "roboRIO",
@@ -13,24 +26,29 @@ var pageIDs = ["firstRoboticsCompetition",
 var pageTitles = ["Home",
     "About Guide",
     "NI roboRIO",
-    "Power Distribution Panel",
-    "Pneumatics Control Module",
-    "Voltage Regulator Module",
-     "Motor Controllers",
-    "Other Notables",
+    "PDP",
+    "PCM",
+    "VRM",
+    "Motor Ctrl",
+    "Others",
     "Conclusion"];
 
-// Initialize
+/*
+Initialize
+ Everything begins here.
+ */
 $(document).on("pageinit", function () {
     if (!donePageInit) {
+        // JSON for knowledge quiz is retrieved.
         $.getJSON("quiz.json", function (data) {
             console.log(data);
             jsonData = data;
+
+            // Next, questions are loaded into appropriate question blocks.
             initQuestionGenerator();
             console.log("Done loading questions");
 
-            // If jsonData object exists in localstorage, then there are saved answers.
-            //  Load em' up.
+            // If jsonData object exists in localstorage, then there are saved answers. Load them.
             let userAnswers = localStorage['FRCQuickstartGuide_QuizData'];
             if(userAnswers) {
                 initLoadUserAnswers(JSON.parse(userAnswers));
@@ -39,6 +57,9 @@ $(document).on("pageinit", function () {
 
             // Add clear saved answers functionality to knowledge quiz 'clear' buttons
             $("a.clearAllAnswers").on("click", function(e) {
+
+                // Converting jsonData object to string, then storing into localStorage.
+                //  Parsed when being read back in.
                 localStorage['FRCQuickstartGuide_QuizData'] = JSON.stringify(jsonData);
                 location.reload(true);
             });
@@ -48,19 +69,38 @@ $(document).on("pageinit", function () {
     }
 });
 
+/*
+Adds mobile.navigate functionality to Go To select option.
+Also performs call to initFooterNavbar, which creates fixed position footer navbar on bottom of page.
+ */
 $(document).on("pagechange", function() {
     initFooterNavbar(pageIDs.indexOf($.mobile.activePage.attr("id")));
     $("select[name=select-page]").change(function(e) {
         console.log($("select[name=select-page] option:selected").text());
+
+        // Grab the ID from user selected page text by comparing indexes with pageIDs.
         let newPageID = pageIDs[pageTitles.indexOf($("select[name=select-page] option:selected").text())];
-        //$("select[name=select-page] option:selected").val([]);
+
         $("." + $.mobile.activePage.attr("id") + "_pageSelector").val([]);
         $.mobile.navigate("#" + newPageID, {transition : "flip"});
     });
 });
 
+/*
+Kick-starts knowledge quiz question generation.
+Starts by compiling question type handlebars.
+ */
+
+// Handlebars
+var mc_hb, fitb_hb, diag_hb = null;
 
 function initQuestionGenerator() {
+    if(mc_hb == null) {
+        mc_hb = Handlebars.compile($("#mc_q_template").html());
+        fitb_hb = Handlebars.compile($("#fitb_q_template").html());
+        diag_hb = Handlebars.compile($("#diag_q_template").html());
+    }
+
     questionGenerator("roboRIO");
     questionGenerator("pdp");
     questionGenerator("pcm");
@@ -68,19 +108,21 @@ function initQuestionGenerator() {
     questionGenerator("motorControllers");
 }
 
+/*
+Compiles required handlebars, and creates the quiz options bar.
+Type of questions are:
+- mc (Multiple Choice, includes T/F)
+- fillin (Single-field fill in the blank)
+- diag (Diagram question, multiple fillin)
+ */
 function questionGenerator(category) {
-    // Compile templates
-    let mc = Handlebars.compile($("#mc_q_template").html());
-    let fitb = Handlebars.compile($("#fitb_q_template").html());
-    let diag = Handlebars.compile($("#diag_q_template").html());
-
     for(let i = 0; i < jsonData[category].length; i++) {
         if(jsonData[category][i].type == "mc") {
-            $("#" + category + "_questionBlock").append(mc(jsonData[category][i]));
+            $("#" + category + "_questionBlock").append(mc_hb(jsonData[category][i]));
         } else if(jsonData[category][i].type == "fillin") {
-            $("#" + category + "_questionBlock").append(fitb(jsonData[category][i]));
+            $("#" + category + "_questionBlock").append(fitb_hb(jsonData[category][i]));
         } else if(jsonData[category][i].type == "diagram") {
-            $("#" + category + "_questionBlock").append(diag(jsonData[category][i]));
+            $("#" + category + "_questionBlock").append(diag_hb(jsonData[category][i]));
         }
         $("#" + category + "_questionBlock").trigger('create');
     }
@@ -89,7 +131,15 @@ function questionGenerator(category) {
     quizNavbarInit(category);
 }
 
+/*
+Options navbar for knowledge quiz.
+Includes functionality to:
+- Check (reveal answers)
+- Save (saves answers to local storage)
+- Clear (clears all answers from screen, and local storage)
+ */
 function quizNavbarInit(category) {
+    // Compile and implement quiz options (navbar) handlebar element.
     let options = Handlebars.compile($("#q_options_template").html());
     $("#" + category + "_quizOptionsBar").append(options(category));
     $("#" + category + "_quizOptionsBar").trigger('create');
@@ -137,6 +187,9 @@ function quizNavbarInit(category) {
     });
 }
 
+/*
+Kick-starts process to load user answers from localstorage.
+ */
 function initLoadUserAnswers(uA) {
     loadUserAnswers(uA, "roboRIO");
     loadUserAnswers(uA, "pdp");
@@ -149,6 +202,10 @@ function initLoadUserAnswers(uA) {
     $("input[type='radio']").checkboxradio("refresh");
 }
 
+/*
+Loads user answers from localstorage.
+Implements similar logic to questionGenerator, but populates elements instead of creates them.
+ */
 function loadUserAnswers(uA, category) {
     // Iterate through the quiz block on each page
     for(let i = 0; i < uA[category].length; i++) {
@@ -169,29 +226,34 @@ function loadUserAnswers(uA, category) {
     }
 }
 
-
+/*
+Generates page footer bar.
+Compiles footer handlebar, and populates appropriate navigation elements.
+Next/Prev functionality is determined by navHandlebarDataObj, which is passed to every footer created.
+ */
 function initFooterNavbar(i) {
     console.log("Initializing footers");
     let footer = Handlebars.compile($("#footer_template").html());
     let navHandlebarDataObj = {};
 
-    if(i == 0) {
+    if(i == 0) { // First Page
         navHandlebarDataObj["prevID"] = pageIDs[i];
         navHandlebarDataObj["prevTitle"] = pageTitles[i];
         navHandlebarDataObj["nextID"] = pageIDs[i + 1];
         navHandlebarDataObj["nextTitle"] = pageTitles[i + 1];
-    } else if(i == pageIDs.length - 1) {
+    } else if(i == pageIDs.length - 1) { // Last Page
         navHandlebarDataObj["prevID"] = pageIDs[i - 1];
         navHandlebarDataObj["prevTitle"] = pageTitles[i - 1];
         navHandlebarDataObj["nextID"] = pageIDs[i];
         navHandlebarDataObj["nextTitle"] = pageTitles[i];
-    } else {
+    } else { // All other pages
         navHandlebarDataObj["prevID"] = pageIDs[i - 1];
         navHandlebarDataObj["prevTitle"] = pageTitles[i - 1];
         navHandlebarDataObj["nextID"] = pageIDs[i + 1];
         navHandlebarDataObj["nextTitle"] = pageTitles[i + 1];
     }
 
+    // Current page
     navHandlebarDataObj["currentID"] = pageIDs[i];
     navHandlebarDataObj["currentTitle"] = pageTitles[i];
 

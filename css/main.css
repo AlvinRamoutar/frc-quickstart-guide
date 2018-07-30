@@ -1,3 +1,11 @@
+/**
+ * Author:      Alvin Ramoutar
+ * Date:        2018/08/03
+ * Description: A simple jQuery Mobile site for info on FRC's Control System Hardware, 2018.
+ *              Developed for Sheridan College, 2018.
+ * File:        css/main.css
+ */
+
 .ui-controlgroup-horizontal .ui-controlgroup-controls {
 	display: block !important;
 }

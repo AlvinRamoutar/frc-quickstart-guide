@@ -1,17 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<!--
+ * Author:      Alvin Ramoutar
+ * Date:        2018/08/03
+ * Description: A simple jQuery Mobile site for info on FRC's Control System Hardware, 2018.
+ *              Developed for Sheridan College, 2018.
+ * File:        index.html
+ *              Collection of virtual jQuery Mobile pages. Primary HTML object for this project.
+-->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="themes/frc.css"/>
     <link rel="stylesheet" href="themes/jquery.mobile.icons.min.css"/>
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.min.css"/>
+    <link rel="stylesheet" href="css/jquery.mobile.structure-1.4.5.min.css"/>
     <link rel="stylesheet" href="css/main.css"/>
 
-    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.js"></script>
+    <script src="js/jquery-2.1.4.min.js"></script>
+    <script src="js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="js/handlebars.js"></script>
     <script src="js/app.js"></script>
     <title>Starter's Guide to FRC</title>
 </head>
@@ -97,6 +105,7 @@
             <li>
                 <select class="footerBtn {{currentID}}_pageSelector" style="margin: 0px;" data-role="button" name="select-page"
                         data-mini="true" data-native-menu="false">
+                    <option data-placeholder="true">Go To...</option>
                     {{#each pageTitles}}
                         <option value="{{../pageIDs.[@index]}}">{{this}}</option>
                     {{/each}}
@@ -141,7 +150,7 @@
             provided on behalf of FIRST sponsors. A key set of this equipment provided would be the
             <strong>FRC Control System Hardware</strong> - both expensive and daunting at first.</p>
     </section>
-    <footer name="firstRoboticsCompetition" data-role="footer"></footer>
+    <footer name="firstRoboticsCompetition" data-role="footer" data-position="fixed"></footer>
 </div>
 
 <!--
@@ -165,7 +174,7 @@
             , as well as the ever-supportive community at <a href="https://www.chiefdelphi.com/forums/portal.php">ChiefDelphi</a>.
         </p>
     </section>
-    <footer name="purposeOfGuide" data-role="footer"></footer>
+    <footer name="purposeOfGuide" data-role="footer" data-position="fixed"></footer>
 </div>
 
 
@@ -324,7 +333,7 @@
             <div id="roboRIO_quizOptionsBar"></div>
         </div>
     </section>
-    <footer name="roboRIO" data-role="footer"></footer>
+    <footer name="roboRIO" data-role="footer" data-position="fixed"></footer>
 </div>
 
 
@@ -406,7 +415,7 @@
             <div id="pdp_quizOptionsBar"></div>
         </div>
     </section>
-    <footer name="pdp" data-role="footer"></footer>
+    <footer name="pdp" data-role="footer" data-position="fixed"></footer>
 </div>
 
 
@@ -492,7 +501,7 @@
             <div id="pcm_quizOptionsBar"></div>
         </div>
     </section>
-    <footer name="pcm" data-role="footer"></footer>
+    <footer name="pcm" data-role="footer" data-position="fixed"></footer>
 </div>
 
 
@@ -564,7 +573,7 @@
             <div id="vrm_quizOptionsBar"></div>
         </div>
     </section>
-    <footer name="vrm" data-role="footer"></footer>
+    <footer name="vrm" data-role="footer" data-position="fixed"></footer>
 </div>
 
 
@@ -675,7 +684,7 @@
             <div id="motorControllers_quizOptionsBar"></div>
         </div>
     </section>
-    <footer name="motorControllers" data-role="footer"></footer>
+    <footer name="motorControllers" data-role="footer" data-position="fixed"></footer>
 </div>
 
 
@@ -706,7 +715,7 @@
         </p>
         <br>
     </section>
-    <footer name="otherNotables" data-role="footer"></footer>
+    <footer name="otherNotables" data-role="footer" data-position="fixed"></footer>
 </div>
 
 
@@ -729,7 +738,7 @@
             <small>~ Alvin [Team 3705 (Arrowbots) Veteran]</small>
         <br>
     </section>
-    <footer name="conclusion" data-role="footer"></footer>
+    <footer name="conclusion" data-role="footer" data-position="fixed"></footer>
 </div>
 
 </body>
