@@ -73,6 +73,17 @@
     <hr/>
 </script>
 
+<!-- Quiz options Handlebar -->
+<script id="q_options_template" type="text/x-handlebars-template">
+    <div data-role="navbar" data-iconpos="right">
+        <ul>
+            <li><a href="#" id="{{this}}_revealAnswers" data-icon="check" data-role="button">Check</a></li>
+            <li><a href="#" id="{{this}}_saveAnswers" data-icon="star" data-role="button">Save</a></li>
+            <li><a href="#" class="clearAllAnswers" data-icon="refresh" data-role="button">Clear</a></li>
+        </ul>
+    </div>
+</script>
+
 <!--
     PAGE 01 (HOME)
     FIRST Robotics Competition
@@ -206,7 +217,7 @@
             <h4>Features</h4>
             <p>
                 <img src="images/am-3000-2_diagram.jpg">
-            <ol type="A">
+            <ul>
                 <li><strong>Digital Input and Output (DIO) connectors</strong><br>
                     Handles digital input (HIGH or LOW signals). Used primary for interfacing sensors to your
                     robotic system, ideal for switches (e.g. Limit Switches).
@@ -291,7 +302,7 @@
                     All FRC robots must come equipped with a provided standard LED lamp, mounted where easily visible.
                     This light flashes depending on roboRIO status.
                 </li>
-            </ol>
+            </ul>
             </p>
         </div>
         <div data-role="collapsible" data-theme="c" data-content-theme="b">
@@ -327,14 +338,7 @@
         <div data-role="collapsible" data-theme="c" data-content-theme="b">
             <h4>Knowledge Quiz</h4>
             <div id="roboRIO_questionBlock"></div>
-            <br>
-            <div data-role="navbar" data-iconpos="right">
-                <ul>
-                    <li><a href="#" data-icon="check" data-role="button">Check</a></li>
-                    <li><a href="#" data-icon="star" data-role="button">Save</a></li>
-                    <li><a href="#" data-icon="refresh" data-role="button">Clear</a></li>
-                </ul>
-            </div>
+            <div id="roboRIO_quizOptionsBar"></div>
         </div>
     </section>
     <footer data-role="footer">
@@ -391,8 +395,8 @@
         <div data-role="collapsible" data-theme="c" data-content-theme="b">
             <h4>Features</h4>
             <p>
-                <img src="images/PDP_diagram.jpg">
-            <ol type="A">
+                <img src="images/217-4244_diagram.jpg">
+            <ul>
                 <li>
                     <strong>PCM, VRM, and roboRIO Channels</strong><br>
                     Channels rated for 20 Amps (PCM, VRM) and 10 Amps (roboRIO).
@@ -413,7 +417,7 @@
                     <strong>Input Power</strong><br>
                     Connects to the 12V battery via battery connectors (Bushings Lugs).
                 </li>
-            </ol>
+            </ul>
             </p>
         </div>
         <div data-role="collapsible" data-theme="c" data-content-theme="b">
@@ -439,14 +443,7 @@
         <div data-role="collapsible" data-theme="c" data-content-theme="b">
             <h4>Knowledge Quiz</h4>
             <div id="pdp_questionBlock"></div>
-            <br>
-            <div data-role="navbar" data-iconpos="right">
-                <ul>
-                    <li><a href="#" data-icon="check" data-role="button">Check</a></li>
-                    <li><a href="#" data-icon="star" data-role="button">Save</a></li>
-                    <li><a href="#" data-icon="refresh" data-role="button">Clear</a></li>
-                </ul>
-            </div>
+            <div id="pdp_quizOptionsBar"></div>
         </div>
     </section>
     <footer data-role="footer">
@@ -509,10 +506,10 @@
         <div data-role="collapsible" data-theme="c" data-content-theme="b">
             <h4>Features</h4>
             <p>
-                <img src="images/PCM_diagram.jpg">
-            <ol type="A">
+                <img src="images/217-4243_diagram.jpg">
+            <ul>
                 <li>
-                    <strong>CAN</strong><br>
+                    CAN<br>
                     Connects the PCM to the roboRIO/PDP/PCM controller area network.
                     Weidmuller connectors.
                 </li>
@@ -527,7 +524,7 @@
                 <li>
                     Compressor output power channel, regulated by PCM.
                 </li>
-            </ol>
+            </ul>
             All Connections are Weidmuller.
             </p>
         </div>
@@ -555,14 +552,7 @@
         <div data-role="collapsible" data-theme="c" data-content-theme="b">
             <h4>Knowledge Quiz</h4>
             <div id="pcm_questionBlock"></div>
-            <br>
-            <div data-role="navbar" data-iconpos="right">
-                <ul>
-                    <li><a href="#" data-icon="check" data-role="button">Check</a></li>
-                    <li><a href="#" data-icon="star" data-role="button">Save</a></li>
-                    <li><a href="#" data-icon="refresh" data-role="button">Clear</a></li>
-                </ul>
-            </div>
+            <div id="pcm_quizOptionsBar"></div>
         </div>
     </section>
     <footer data-role="footer">
@@ -617,25 +607,21 @@
         <div data-role="collapsible" data-theme="c" data-content-theme="b">
             <h4>Features</h4>
             <p>
-                <img src="images/VRM_diagram.jpg">
-            <ol type="A">
+                <img src="images/am-2857-2_diagram.jpg">
+            <ul>
                 <li>
-                    <strong>CAN</strong><br>
-                    Connects the PCM to the roboRIO/PDP/PCM controller area network.
-                    Weidmuller connectors.
+                    2 x 5V/2A channels (+/- pair)
                 </li>
                 <li>
-                    8 Solenoid Channels rated for 12/24V (adjusted via jumper) at a current sum of 500mA. Used to power
-                    pneumatic solenoids.
+                    2 x 5V/500mA channels (+/- pair)
                 </li>
                 <li>
-                    Pressure switch input.
-                    Gives the PCM insight into the air pressure contained within your pneumatics system.
+                    2 x 12V/2A channels (+/- pair)
                 </li>
                 <li>
-                    Compressor output power channel, regulated by PCM.
+                    2 x 12V/500mA channels (+/- pair)
                 </li>
-            </ol>
+            </ul>
             All Connections are Weidmuller.
             </p>
         </div>
@@ -644,40 +630,31 @@
             <p>
             <ul>
                 <li>
-                    Changing the solenoid voltage jumper changes the voltage across ALL solenoid channels. If left
-                    floating (NO jumper), the voltage across solenoid channels will be 24V.
+                    The current rating is a COMBINED rating for BOTH channel pairs for each set. Taking the 5V/2A
+                    channel pair for instance, you can connect 2 devices. COMBINED, both devices must have a current
+                    draw less than 2A.
                 </li>
                 <li>
-                    When mounting, take advantage of the holes on either corner which are perfect for a classic bolt &
-                    nut.
+                    In addition to the above, the 12V/2A channels have 2A listed as a PEAK for the VRM itself.
+                    Realistically, the combined continuous current draw of the 12V/2A channels should NOT exceed 1.5A.
                 </li>
                 <li>
-                    As an aside, the air compressor will most likely be the loudest component of your robotic system. It
-                    is recommended that the air compressor be mounted AWAY from your control system board, near the
-                    tanks, and done so securely. The vibrations can loosen a standard nut from a bolt, as such, systems
-                    mounted near the air compressor using a bolt & nut should utilize lock nuts and lock washers.
+                    Mounting the VRM is similar to the PCM, via bolt & nut on each of the 4 corners.
                 </li>
             </ul>
             </p>
         </div>
         <div data-role="collapsible" data-theme="c" data-content-theme="b">
             <h4>Knowledge Quiz</h4>
-            <div id="pcm_questionBlock"></div>
-            <br>
-            <div data-role="navbar" data-iconpos="right">
-                <ul>
-                    <li><a href="#" data-icon="check" data-role="button">Check</a></li>
-                    <li><a href="#" data-icon="star" data-role="button">Save</a></li>
-                    <li><a href="#" data-icon="refresh" data-role="button">Clear</a></li>
-                </ul>
-            </div>
+            <div id="vrm_questionBlock"></div>
+            <div id="vrm_quizOptionsBar"></div>
         </div>
     </section>
     <footer data-role="footer">
         <div data-role="navbar" data-iconpos="right">
             <ul>
                 <li>
-                    <a class="footerBtn" href="#pdp" data-role="button"
+                    <a class="footerBtn" href="#pcm" data-role="button"
                        data-icon="arrow-l"
                        data-transition="flip"
                        data-direction="reverse">Back</a>
@@ -691,7 +668,245 @@
                     </select>
                 </li>
                 <li>
-                    <a class="footerBtn" href="#vrm" data-role="button" data-icon="arrow-r" data-transition="flip"
+                    <a class="footerBtn" href="#motorControllers" data-role="button" data-icon="arrow-r"
+                       data-transition="flip"
+                       data-direction="forward">Next</a>
+                </li>
+            </ul>
+        </div>
+    </footer>
+</div>
+
+
+<!--
+    PAGE 07
+    Motor Controllers
+-->
+<div data-role="page" id="motorControllers">
+    <header data-role="header">
+        <h1>FRC Starter's Guide</h1>
+    </header>
+    <section role="main" class="ui-content">
+        <h2>Motor Controllers</h2>
+        <img src="images/speedcontrollers.jpg">
+        <p class="wpilibSummary">
+            There are a variety of different motor controllers which work with the FRC Control System and are approved
+            for use. These devices are used to provide variable voltage control of the brushed DC motors used in FRC.
+        </p>
+        <p>
+            Motor Controllers is a generic category that covers both speed controllers and relays provided/supported by
+            FRC. Depending on your team and kit composition, you may utilize different combinations of motor
+            controllers. For this reason, I'll try to cover motor controllers from a general sense, since they're all
+            pretty similar at the end of the day.
+        </p>
+        <br>
+        <div data-role="collapsible" data-theme="c" data-content-theme="b">
+            <h4>Relays</h4>
+            <img src="images/800px-Small_DIP_DPDT_relay_and_driving_transistor.jpg">
+            <small>Small DIP Relay</small>
+            <p>
+                A simple, electrically operated but mechanical in nature switch. Relays are often used to control power
+                to a system, where the control signal is a separate and significantly less powerful.
+                <br>
+                The most popular relay uses an electromagnet to mechanically operate the switch. During operation,
+                relays of this nature feature physically moving parts, and as such, emit 'clicks' when switched.
+                <br>
+                Unlike speed controllers, relays tend to be physically smaller, but require a fuse of their own. They
+                are also cheaper.
+            </p>
+
+            <h4>So, where do you use relays in your robotics system?</h4>
+            <p>
+            <ul>
+                <li>
+                    If the motor(s) driven only need to move forwards/backwards with minimal/no regulation on speed. For
+                    example, a small motor driving a belt feed. The speed is irrelevant, as long as the fed item gets to
+                    the required subsystem. Another example would be a 2-state actuator, where an armature is either
+                    closed (retracted), or extended at a fixed-angle.
+                </li>
+            </ul>
+            </p>
+        </div>
+        <div data-role="collapsible" data-theme="c" data-content-theme="b">
+            <h4>Speed Controllers (ESC)</h4>
+            <img src="images/ESC_35A.jpg">
+            <small>Generic ESC module</small>
+            <p>
+                A method of electronic speed control, which can drive a motor at varying speeds in either direction.
+                This is done by rapidly switching the power for the motor. Quicker switching, the faster the motor runs,
+                and vice-versa.
+                <br>
+                Some speed controllers utilize technology similar to relays. The majority of speed controllers supported
+                by FRC are electronic, using transistors instead of relays. The rapid switching of these transistors is
+                what causes the variable duty cycles.
+                <br>
+            <h4>Pulse Width Modulation (PWM)</h4>
+            Unlike a relay which requires a simple on/off signal, speed controllers (ESC for the purpose of FRC) utilize
+            pulse-width modulation (PWM) signals. Really, PWM is a fancy term for digital signals featuring duty cycles,
+            where the variance of 'on time' (HIGH) evaluates to the time when the motor receives power. These duty cycle
+            signals are sent to a speed controller in pulses.
+            <br>
+            PWM is popular for servos, (usually) small precise motors meant for precise motion.
+            Popular speed controllers supported by FRC would be the Talon, Jaguar, and Victor series'.
+            <br>
+            <h4>Proportional-Integral-Derivative (PID)</h4>
+            With a little more effort, I suggest teams take a look at PID (proportional-integral-derivative)
+            Controllers. PID technology is used for controlling and tracking kinematic systems where precision is key.
+            <br>
+            Think about it; all this time, we are driving a motor with some signal, telling it to run for X amount of
+            time, at Y percentage. But, how do we ensure that the motor actually went that distance, or ran at that
+            speed?
+            <br>
+            PID is a MUST for autonomous. With PID, the microcontroller retrieves feedback from that specific system,
+            which it can then use to correct any errors. For instance, if the system expects 15 revolutions, but only
+            performed 10 after X duty cycles, then the system can perform extra duty cycles until it reaches the
+            required revolutions, automatically, without user input.
+            </p>
+
+            <h4>So, where do you use speed controllers in your robotics system?</h4>
+            <p>
+            <ul>
+                <li>
+                    Your drive train! You (hopefully) want to control the speed in which your robot moves forwards and
+                    backwards.
+                </li>
+                <li>
+                    Fly-wheels for a shooter, or a belt/motor driven feed system.
+                </li>
+                <li>
+                    Servos used for rotating your camera, or rotating an arm, where the angle is important.
+                </li>
+            </ul>
+            </p>
+        </div>
+        <div data-role="collapsible" data-theme="c" data-content-theme="b">
+            <h4>Knowledge Quiz</h4>
+            <div id="motorControllers_questionBlock"></div>
+            <div id="motorControllers_quizOptionsBar"></div>
+        </div>
+    </section>
+    <footer data-role="footer">
+        <div data-role="navbar" data-iconpos="right">
+            <ul>
+                <li>
+                    <a class="footerBtn" href="#vrm" data-role="button"
+                       data-icon="arrow-l"
+                       data-transition="flip"
+                       data-direction="reverse">Back</a>
+                </li>
+                <li>
+                    <select class="footerBtn" style="margin: 0px;" data-role="button" name="select-page"
+                            data-mini="true">
+                        <option value="0">Home</option>
+                        <option value="1">About</option>
+                        <option value="2">The 3rd Option</option>
+                    </select>
+                </li>
+                <li>
+                    <a class="footerBtn" href="#otherNotables" data-role="button" data-icon="arrow-r"
+                       data-transition="flip"
+                       data-direction="forward">Next</a>
+                </li>
+            </ul>
+        </div>
+    </footer>
+</div>
+
+
+<!--
+    PAGE 08
+    Other Notable mentions
+-->
+<div data-role="page" id="otherNotables">
+    <header data-role="header">
+        <h1>FRC Starter's Guide</h1>
+    </header>
+    <section role="main" class="ui-content">
+        <h2>Other Notable Mentions</h2>
+        <h4>Camera</h4>
+        <img src="images/0634ad6f-2114-49e7-883c-8e9464595360.jpg">
+        <p>
+            With so many teams using different camera technology, I won't dwell into this much. However, cameras are
+            encouraged for teams, with professional teams utilizing multiple to get the best view of the field from
+            their stations. A list of FRC-standard cameras can be found on the WPILib control system documentation page.
+        </p>
+        <br>
+        <h4>Radio</h4>
+        <img src="images/om5p-ac_48.png">
+        <p>
+            Less of a control system element and more of a means of communication. For that reason, it has been excluded
+            from this guide. However, there is a plethora of information regarding how the radio works, as well as the
+            communication between the roboRIO, radio, and control station on WPILib.
+        </p>
+        <br>
+    </section>
+    <footer data-role="footer">
+        <div data-role="navbar" data-iconpos="right">
+            <ul>
+                <li>
+                    <a class="footerBtn" href="#motorControllers" data-role="button"
+                       data-icon="arrow-l"
+                       data-transition="flip"
+                       data-direction="reverse">Back</a>
+                </li>
+                <li>
+                    <select class="footerBtn" style="margin: 0px;" data-role="button" name="select-page"
+                            data-mini="true">
+                        <option value="0">Home</option>
+                        <option value="1">About</option>
+                        <option value="2">The 3rd Option</option>
+                    </select>
+                </li>
+                <li>
+                    <a class="footerBtn" href="#conclusion" data-role="button" data-icon="arrow-r"
+                       data-transition="flip"
+                       data-direction="forward">Next</a>
+                </li>
+            </ul>
+        </div>
+    </footer>
+</div>
+
+
+<!--
+    PAGE 09
+    Conclusion
+-->
+<div data-role="page" id="conclusion">
+    <header data-role="header">
+        <h1>FRC Starter's Guide</h1>
+    </header>
+    <section role="main" class="ui-content">
+        <h2>Conclusion</h2>
+        <p>
+            You are now ready to dwell into the world that is FRC. The content we've discussed is but a tidbit of what you will encounter along your journey. Use it as a starting platform to build upon.
+        <br>
+            Keep your mind open, embrace learning, build awesome bots, stay graciously professional, and have fun!
+        </p>
+        <br>
+            <small>~ Alvin [Team 3705 (Arrowbots) Veteran]</small>
+        <br>
+    </section>
+    <footer data-role="footer">
+        <div data-role="navbar" data-iconpos="right">
+            <ul>
+                <li>
+                    <a class="footerBtn" href="#otherNotables" data-role="button"
+                       data-icon="arrow-l"
+                       data-transition="flip"
+                       data-direction="reverse">Back</a>
+                </li>
+                <li>
+                    <select class="footerBtn" style="margin: 0px;" data-role="button" name="select-page"
+                            data-mini="true">
+                        <option value="0">Home</option>
+                        <option value="1">About</option>
+                        <option value="2">The 3rd Option</option>
+                    </select>
+                </li>
+                <li>
+                    <a class="footerBtn" href="#conclusion" data-role="button" data-icon="arrow-r"
+                       data-transition="flip"
                        data-direction="forward">Next</a>
                 </li>
             </ul>

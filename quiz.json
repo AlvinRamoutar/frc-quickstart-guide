@@ -8,6 +8,7 @@
         "True",
         "False"
       ],
+      "userAnswer": [],
       "solution": "False",
       "explanation": "The roboRIO is not a computer, but rather a microcontroller. SCSI is not supported, since the specification of SCSI states its purpose is to connect peripherals to a computer system."
     },
@@ -16,6 +17,7 @@
       "type": "fillin",
       "question": "The roboRIO's DIO has a sink/source current of:",
       "choices": {},
+      "userAnswer": [],
       "solution": "4",
       "explanation": "DIO, digital input/output, is NOT used to power any system. It is for digital signals, plain and simple. Drawing more than 4 mA is a sure-fire way to damage the roboRIO."
     },
@@ -30,6 +32,7 @@
         "Pulse-Width Modulation (PWM)",
         "Analog IN"
       ],
+      "userAnswer": [],
       "solution": "c, d, a, b",
       "explanation": ""
     }
@@ -45,6 +48,7 @@
        "PCM, VRM, and roboRIO channels only.",
        "vBat Output, PCM, VRM, and roboRIO channels."
       ],
+      "userAnswer": [],
       "solution": "vBat Output, PCM, VRM, and roboRIO channels.",
       "explanation": "The PDP is also a circuit breaker, and its job as a circuit breaker is to protect your components. To ensure its job is done, and that your robot is safe, NO connected components will function without a fuse of the appropriate amperage placed in the respected spot. Do note for the vBat output channels, it is only necessary to place a fuse on the channel where you are drawing power from."
     },
@@ -53,6 +57,7 @@
       "type": "fillin",
       "question": "The PDP has a total of ___ output pairs rated at 40A.",
       "choices": {},
+      "userAnswer": [],
       "solution": "8",
       "explanation": "The PDP has a total of 16 vBat output pairs, 8 of which are rated for 40A, the other 8 for 30A."
     },
@@ -67,6 +72,7 @@
         "Controller Area Network (CAN)",
         "vBAT Power Rail"
       ],
+      "userAnswer": [],
       "solution": "a, d, c, b",
       "explanation": ""
     }
@@ -80,6 +86,7 @@
         "True",
         "False"
       ],
+      "userAnswer": [],
       "solution": "False",
       "explanation": "The 'P' in PCM stands for pneumatic. The difference between pneumatic and hydraulics is that the former deals with compressed gas, while the latter deals with compressed liquid/oil. They are NOT interchangeable."
     },
@@ -88,6 +95,7 @@
       "type": "fillin",
       "question": "When the solenoid voltage jumper is disabled (floating), the solenoid output channels will have a voltage of ___.",
       "choices": {},
+      "userAnswer": [],
       "solution": "24",
       "explanation": "When in the leftmost position, solenoid channels will be operating at 12V. Else, 24V as stated in documentation."
     },
@@ -102,6 +110,7 @@
         "Solenoid Power Channels",
         "Controller Area Network (CAN)"
       ],
+      "userAnswer": [],
       "solution": "d, c, b, a",
       "explanation": ""
     }
@@ -115,6 +124,7 @@
         "True",
         "False"
       ],
+      "userAnswer": [],
       "solution": "False",
       "explanation": "The 5V and 12V channels are each ran by their own independent SEPIC (single ended primary inductor converter)."
     },
@@ -123,6 +133,7 @@
       "type": "fillin",
       "question": "What is the continuous current draw limit for a 2A channel?",
       "choices": {},
+      "userAnswer": [],
       "solution": "1.5",
       "explanation": "The 2A rating is a PEAK current. In reality, continuous draw should not exceed 1.5A."
     },
@@ -137,6 +148,7 @@
         "12V/500mA Channels",
         "5V/2A Channels"
       ],
+      "userAnswer": [],
       "solution": "d, a, b, c",
       "explanation": ""
     }
@@ -144,20 +156,10 @@
   "motorControllers": [
     {
       "category": "motorControllers",
-      "type": "mc",
-      "question": "You can build a speed controller with relays.",
-      "choices": [
-        "True",
-        "False"
-      ],
-      "solution": "True",
-      "explanation": "Although more difficult than using an h-bridge, it is indeed possible to build a speed controller with an array of relays."
-    },
-    {
-      "category": "motorControllers",
       "type": "fillin",
       "question": "Speed controllers, notably the ESC (electronic speed control) modules used in FRC are controlled with this 3-letter acronym signal.",
       "choices": {},
+      "userAnswer": [],
       "solution": "pwm",
       "explanation": "PWM (Pulse Width Modulation) is a digital signal based on digital HIGH and LOW duty cycles, transmitted in pulses."
     },
@@ -167,23 +169,13 @@
       "question": "Utilizes mechanical switching technology.",
       "choices": [
         "Relays",
-        "Speed Controllers",
+        "Electronic Speed Controllers",
         "Both",
         "Neither"
       ],
+      "userAnswer": [],
       "solution": "a",
       "explanation": "ESC (electronic speed control) uses transistors for switching. Relays use a mechanical switch, often times consisting of an electromagnet."
-    },
-    {
-      "category": "motorControllers",
-      "type": "mc",
-      "question": "With regards to driving a motor with a speed controller via PWM, faster speed is expected from a longer duration of HIGH duty cycles.",
-      "choices": [
-        "True",
-        "False"
-      ],
-      "solution": "True",
-      "explanation": "While HIGH, a speed controller sends power to a motor. Simply; the more power it receives, the more work it completes."
     }
   ]
 }
